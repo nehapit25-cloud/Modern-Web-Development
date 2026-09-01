@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Student Grade Calculator</title>
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="w-96 mx-auto mt-20 bg-white p-6 shadow">
+
+        <h1 class="text-2xl font-bold mb-5">
+            Student Grade Calculator
+        </h1>
+
+        <label>Lab Practical 1 (out of 10)</label>
+        <input type="number" id="mark1"
+            class="border p-2 w-full mb-3">
+
+        <label>Lab Practical 2 (out of 10)</label>
+        <input type="number" id="mark2"
+            class="border p-2 w-full mb-3">
+
+        <label>Viva / Oral (out of 10)</label>
+        <input type="number" id="mark3"
+            class="border p-2 w-full mb-4">
+
+        <button onclick="calculateResult()"
+            class="bg-blue-500 text-white px-4 py-2 rounded">
+            Calculate Result
+        </button>
+
+        <div id="result" class="mt-5"></div>
+
+    </div>
+
+
+    <script>
+
+        // Function to calculate total
+        function calculateTotal(m1, m2, m3) {
+            return m1 + m2 + m3;
+        }
+
+        // Function to calculate grade
+        function getGrade(percentage) {
+
+            if (percentage >= 90)
+                return "A+";
+            else if (percentage >= 75)
+                return "A";
+            else if (percentage >= 60)
+                return "B";
+            else if (percentage >= 50)
+                return "C";
+            else
+                return "F";
+        }
+
+        // Main function
+        function calculateResult() {
+
+            let m1 = Number(document.getElementById("mark1").value);
+            let m2 = Number(document.getElementById("mark2").value);
+            let m3 = Number(document.getElementById("mark3").value);
+
+            let total = calculateTotal(m1, m2, m3);
+
+            let percentage = (total / 30) * 100;
+
+            let grade = getGrade(percentage);
+
+            document.getElementById("result").innerHTML =
+                "Total Marks: " + total + " / 30 <br>" +
+                "Percentage: " + percentage.toFixed(2) + "% <br>" +
+                "Grade: " + grade;
+        }
+
+    </script>
+
+</body>
+
+</html>
