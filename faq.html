@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>College Help Desk</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e8f0ff, #ffffff);
+        }
+
+        .header {
+            text-align: center;
+            padding: 35px 10px 20px;
+        }
+
+        .header h1 {
+            color: #203864;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .faq-box {
+            width: 75%;
+            max-width: 800px;
+            margin: 20px auto 50px;
+        }
+
+        .faq-item {
+            background: white;
+            margin: 14px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #cbd5e1;
+            overflow: hidden;
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            padding: 18px;
+            cursor: pointer;
+        }
+
+        .number {
+            background: #203864;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .question-text {
+            flex: 1;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .icon {
+            font-size: 22px;
+            color: #203864;
+        }
+
+        .answer {
+            display: none;
+            padding: 0 20px 18px 68px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .answer {
+            display: block;
+        }
+
+        .faq-item.active .icon {
+            transform: rotate(45deg);
+        }
+
+        .footer {
+            text-align: center;
+            color: #777;
+            padding-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🎓 College Help Desk</h1>
+        <p>Frequently Asked Questions for Students
+        </p>
+        <p>Name:Neha Nagesh Powale
+            </p>
+            <p>USN:IT25091</p>
+    </div>
+
+
+    <div class="faq-box">
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">1</div>
+                <div class="question-text">
+                    What are the college working hours?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                College working hours depend on the department and academic
+                schedule. Students should check the official timetable.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">2</div>
+                <div class="question-text">
+                    How can I check my examination schedule?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                Students can check the examination schedule on the official
+                college website, notice board or student portal.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">3</div>
+                <div class="question-text">
+                    Where can students find important notices?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                Important notices are generally displayed on the college
+                notice board and official student portal.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">4</div>
+                <div class="question-text">
+                    How can I get a college ID card?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                Students can contact the college office or their department
+                to know the procedure for getting an ID card.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">5</div>
+                <div class="question-text">
+                    How can I borrow books from the library?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                Students can borrow books by using their valid college ID
+                card and following the library rules.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">6</div>
+                <div class="question-text">
+                    Where can I get study materials?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                Study materials can be obtained from the respective faculty,
+                classroom resources or the student learning portal.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">7</div>
+                <div class="question-text">
+                    What facilities are available for students?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                The college provides facilities such as laboratories,
+                library, computer labs, classrooms and sports facilities.
+            </div>
+        </div>
+
+
+        <div class="faq-item">
+            <div class="question">
+                <div class="number">8</div>
+                <div class="question-text">
+                    Whom should I contact for college-related queries?
+                </div>
+                <div class="icon">+</div>
+            </div>
+
+            <div class="answer">
+                Students can contact their department office, faculty member
+                or college administration for assistance.
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+        College Student Support | FAQ Portal
+    </div>
+
+
+    <script>
+
+        let questions = document.querySelectorAll(".question");
+
+        questions.forEach(function(question) {
+
+            question.addEventListener("click", function() {
+
+                let currentItem = this.parentElement;
+
+                // Close other FAQ answers
+                document.querySelectorAll(".faq-item").forEach(function(item) {
+                    if (item !== currentItem) {
+                        item.classList.remove("active");
+                    }
+                });
+
+                // Open/close clicked FAQ
+                currentItem.classList.toggle("active");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
