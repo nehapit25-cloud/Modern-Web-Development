@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-50 min-h-screen flex items-center justify-center p-6">
+
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-xl overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-blue-600 text-white text-center p-6">
+            <h1 class="text-3xl font-bold">Student Registration</h1>
+            <p class="mt-2">College Admission Portal</p>
+        </div>
+
+        <form id="studentForm" class="p-8">
+
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <!-- Full Name -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+
+                    <p id="nameError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="text"
+                        id="email"
+                        placeholder="example@gmail.com"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+
+                    <p id="emailError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Mobile -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Mobile Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="mobile"
+                        placeholder="10 digit mobile number"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+
+                    <p id="mobileError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Date of Birth -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Date of Birth
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dob"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+
+                    <p id="dobError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Gender -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Gender
+                    </label>
+
+                    <select
+                        id="gender"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+
+                    <p id="genderError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Course -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Select Course
+                    </label>
+
+                    <select
+                        id="course"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+                        <option value="">Select Course</option>
+                        <option>BCA</option>
+                        <option>BBA</option>
+                        <option>B.Com</option>
+                        <option>B.Sc</option>
+                        <option>MCA</option>
+                    </select>
+
+                    <p id="courseError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Minimum 8 characters"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+
+                    <p id="passwordError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <label class="block font-semibold mb-2">
+                        City
+                    </label>
+
+                    <input
+                        type="text"
+                        id="city"
+                        placeholder="Enter your city"
+                        class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-400 outline-none"
+                    >
+
+                    <p id="cityError" class="text-red-500 text-sm mt-1"></p>
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="w-full mt-8 bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            >
+                Submit Registration
+            </button>
+
+            <!-- Success Message -->
+            <p
+                id="success"
+                class="text-green-600 text-center font-semibold mt-5"
+            ></p>
+
+        </form>
+    </div>
+
+
+    <!-- JavaScript Validation -->
+    <script>
+
+        document.getElementById("studentForm").addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let mobile = document.getElementById("mobile").value.trim();
+            let dob = document.getElementById("dob").value;
+            let gender = document.getElementById("gender").value;
+            let course = document.getElementById("course").value;
+            let password = document.getElementById("password").value;
+            let city = document.getElementById("city").value.trim();
+
+            // Clear old errors
+            document.querySelectorAll("p").forEach(function(p) {
+                if (p.id !== "success") {
+                    p.textContent = "";
+                }
+            });
+
+            document.getElementById("success").textContent = "";
+
+            let valid = true;
+
+            // Name
+            if (name === "") {
+                document.getElementById("nameError").textContent =
+                    "Please enter your name.";
+                valid = false;
+            }
+
+            // Email
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === "") {
+                document.getElementById("emailError").textContent =
+                    "Email is required.";
+                valid = false;
+            }
+            else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent =
+                    "Enter a valid email address.";
+                valid = false;
+            }
+
+            // Mobile
+            let mobilePattern = /^[0-9]{10}$/;
+
+            if (mobile === "") {
+                document.getElementById("mobileError").textContent =
+                    "Mobile number is required.";
+                valid = false;
+            }
+            else if (!mobilePattern.test(mobile)) {
+                document.getElementById("mobileError").textContent =
+                    "Enter a valid 10-digit mobile number.";
+                valid = false;
+            }
+
+            // Date of Birth
+            if (dob === "") {
+                document.getElementById("dobError").textContent =
+                    "Please select your date of birth.";
+                valid = false;
+            }
+
+            // Gender
+            if (gender === "") {
+                document.getElementById("genderError").textContent =
+                    "Please select your gender.";
+                valid = false;
+            }
+
+            // Course
+            if (course === "") {
+                document.getElementById("courseError").textContent =
+                    "Please select a course.";
+                valid = false;
+            }
+
+            // Password
+            if (password === "") {
+                document.getElementById("passwordError").textContent =
+                    "Password is required.";
+                valid = false;
+            }
+            else if (password.length < 8) {
+                document.getElementById("passwordError").textContent =
+                    "Password must be at least 8 characters.";
+                valid = false;
+            }
+
+            // City
+            if (city === "") {
+                document.getElementById("cityError").textContent =
+                    "Please enter your city.";
+                valid = false;
+            }
+
+            // Successful submission
+            if (valid) {
+
+                document.getElementById("success").textContent =
+                    "Registration submitted successfully!";
+
+                document.getElementById("studentForm").reset();
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+
