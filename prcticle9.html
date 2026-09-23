@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Daily Task Planner</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 min-h-screen">
+
+    <div class="max-w-3xl mx-auto px-4 py-10">
+
+        <!-- Header -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 text-center mb-6">
+
+            <div class="text-5xl mb-3">📚</div>
+
+            <h1 class="text-4xl font-bold text-indigo-700">
+                Daily Task Planner
+            </h1>
+
+            <p class="text-gray-500 mt-2">
+                Plan your day • Complete your goals • Stay productive
+            </p>
+            <p>IT25091_Neha Powale</p>
+
+        </div>
+
+
+        <!-- Add Task Section -->
+        <div class="bg-white rounded-3xl shadow-xl p-6 mb-6">
+
+            <h2 class="text-xl font-bold text-gray-700 mb-4">
+                ✨ Add New Task
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-3">
+
+                <!-- Task Input -->
+                <input
+                    type="text"
+                    id="taskInput"
+                    placeholder="Enter your task"
+                    class="md:col-span-2 border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-400"
+                >
+
+                <!-- Category -->
+                <select
+                    id="category"
+                    class="border border-gray-300 rounded-xl px-4 py-3 outline-none focus:ring-2 focus:ring-indigo-400"
+                >
+                    <option value="📚 Academic">📚 Academic</option>
+                    <option value="🏠 Personal">🏠 Personal</option>
+                </select>
+
+            </div>
+
+            <button
+                onclick="addTask()"
+                class="w-full mt-4 bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700 transition"
+            >
+                + Add Task
+            </button>
+
+        </div>
+
+
+        <!-- Task Section -->
+        <div class="bg-white rounded-3xl shadow-xl p-6">
+
+            <div class="flex justify-between items-center mb-5">
+
+                <h2 class="text-2xl font-bold text-gray-700">
+                    My Tasks
+                </h2>
+
+                <span
+                    id="taskCount"
+                    class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full font-semibold"
+                >
+                    0 Tasks
+                </span>
+
+            </div>
+
+
+            <!-- Task List -->
+            <div id="taskList" class="space-y-3"></div>
+
+
+            <!-- Empty Message -->
+            <div
+                id="emptyMessage"
+                class="text-center py-10 text-gray-400"
+            >
+                <div class="text-5xl mb-3">🌸</div>
+
+                <p class="font-medium">
+                    Your task list is empty!
+                </p>
+
+                <p class="text-sm">
+                    Add a task and start your productive day.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- Footer -->
+        <p class="text-center text-gray-500 mt-6 text-sm">
+            💜 Small tasks. Big achievements.
+        </p>
+
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        const taskInput = document.getElementById("taskInput");
+        const category = document.getElementById("category");
+        const taskList = document.getElementById("taskList");
+        const taskCount = document.getElementById("taskCount");
+        const emptyMessage = document.getElementById("emptyMessage");
+
+
+        // Add Task
+        function addTask() {
+
+            const taskText = taskInput.value.trim();
+            const taskCategory = category.value;
+
+            if (taskText === "") {
+
+                alert("Please enter a task!");
+
+                return;
+            }
+
+
+            const task = document.createElement("div");
+
+            task.className =
+                "flex items-center justify-between bg-gray-50 border border-gray-200 rounded-2xl p-4";
+
+
+            task.innerHTML = `
+
+                <div class="flex items-center gap-3">
+
+                    <input
+                        type="checkbox"
+                        onchange="completeTask(this)"
+                        class="w-5 h-5 accent-indigo-600 cursor-pointer"
+                    >
+
+                    <div>
+
+                        <p class="taskText font-semibold text-gray-700">
+                            ${taskText}
+                        </p>
+
+                        <span class="text-sm text-indigo-500">
+                            ${taskCategory}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    onclick="deleteTask(this)"
+                    class="bg-red-100 text-red-500 px-3 py-2 rounded-lg hover:bg-red-200"
+                >
+                    🗑️
+                </button>
+
+            `;
+
+
+            taskList.appendChild(task);
+
+            taskInput.value = "";
+
+            updateTaskCount();
+            updateEmptyMessage();
+
+        }
+
+
+        // Complete Task
+        function completeTask(checkbox) {
+
+            const taskText =
+                checkbox.parentElement.querySelector(".taskText");
+
+
+            if (checkbox.checked) {
+
+                taskText.classList.add(
+                    "line-through",
+                    "text-gray-400"
+                );
+
+            } else {
+
+                taskText.classList.remove(
+                    "line-through",
+                    "text-gray-400"
+                );
+
+            }
+
+        }
+
+
+        // Delete Task
+        function deleteTask(button) {
+
+            button.parentElement.parentElement.remove();
+
+            updateTaskCount();
+            updateEmptyMessage();
+
+        }
+
+
+        // Update Counter
+        function updateTaskCount() {
+
+            const count = taskList.children.length;
+
+            taskCount.textContent =
+                count + (count === 1 ? " Task" : " Tasks");
+
+        }
+
+
+        // Empty Message
+        function updateEmptyMessage() {
+
+            if (taskList.children.length === 0) {
+
+                emptyMessage.classList.remove("hidden");
+
+            } else {
+
+                emptyMessage.classList.add("hidden");
+
+            }
+
+        }
+
+
+        // Enter Key
+        taskInput.addEventListener("keypress", function(event) {
+
+            if (event.key === "Enter") {
+
+                addTask();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
+
