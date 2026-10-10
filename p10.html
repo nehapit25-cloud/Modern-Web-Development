@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WasteWise | Smart Waste Segregation Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="bg-green-800 text-white p-4">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">♻ WasteWise</h1>
+            <a href="#checker" class="bg-white text-green-800 px-4 py-2 rounded-lg font-semibold">
+                Check Waste
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-green-700 text-white px-5 py-14 text-center">
+        <p class="uppercase tracking-widest text-green-200 text-sm mb-3">
+            Smart Waste Management
+        </p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-5">
+            Don't Waste It. Sort It!
+        </h2>
+        <p class="max-w-2xl mx-auto text-green-50 text-lg">
+            Identify waste, learn the correct disposal method, and
+            take a small step towards a cleaner planet.
+        </p>
+        <a href="#checker"
+           class="inline-block mt-7 bg-yellow-300 text-green-900 px-6 py-3 rounded-lg font-bold hover:bg-yellow-200">
+            Identify Your Waste →
+        </a>
+    </section>
+
+    <!-- Categories -->
+    <section class="max-w-6xl mx-auto px-5 py-10" id="categories">
+        <h2 class="text-3xl font-bold text-center mb-3">
+            Explore Waste Categories
+        </h2>
+        <p class="text-center text-gray-500 mb-8">
+            Learn where different waste items belong.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-blue-500">
+                <div class="text-4xl mb-3">📦</div>
+                <h3 class="font-bold text-xl text-blue-700">Dry Waste</h3>
+                <p class="mt-2 text-gray-600">Paper, cardboard and clean recyclable packaging.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-green-500">
+                <div class="text-4xl mb-3">🍎</div>
+                <h3 class="font-bold text-xl text-green-700">Wet Waste</h3>
+                <p class="mt-2 text-gray-600">Fruit peels, vegetable scraps and food leftovers.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-purple-500">
+                <div class="text-4xl mb-3">💻</div>
+                <h3 class="font-bold text-xl text-purple-700">E-Waste</h3>
+                <p class="mt-2 text-gray-600">Old phones, computers and electronic devices.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border-t-4 border-red-500">
+                <div class="text-4xl mb-3">⚠️</div>
+                <h3 class="font-bold text-xl text-red-700">Special Disposal</h3>
+                <p class="mt-2 text-gray-600">Batteries, medicines and other items needing special handling.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Waste Checker -->
+    <section id="checker" class="bg-green-50 px-5 py-12">
+        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-md p-6 md:p-9">
+
+            <h2 class="text-3xl font-bold text-center">🔎 Waste Checker</h2>
+            <p class="text-center text-gray-500 mt-2 mb-7">
+                Search for an item or select its category.
+            </p>
+
+            <label for="searchItem" class="block font-semibold mb-2">
+                Enter waste item
+            </label>
+
+            <input id="searchItem" type="text"
+                   list="wasteOptions"
+                   placeholder="e.g. plastic bottle, banana peel, mobile phone"
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-green-500 outline-none">
+
+            <datalist id="wasteOptions">
+                <option value="Plastic Bottle">
+                <option value="Paper">
+                <option value="Cardboard">
+                <option value="Glass Bottle">
+                <option value="Food Waste">
+                <option value="Banana Peel">
+                <option value="Old Mobile Phone">
+                <option value="Laptop">
+                <option value="Battery">
+                <option value="Expired Medicine">
+                <option value="Light Bulb">
+                <option value="Used Tissue">
+            </datalist>
+
+            <label for="categoryFilter" class="block font-semibold mt-5 mb-2">
+                Filter by category
+            </label>
+
+            <select id="categoryFilter"
+                    class="w-full border border-gray-300 rounded-lg p-3 bg-white">
+                <option value="All">All Categories</option>
+                <option value="Dry Waste">Dry Waste</option>
+                <option value="Wet Waste">Wet Waste</option>
+                <option value="E-Waste">E-Waste</option>
+                <option value="Special Disposal">Special Disposal</option>
+            </select>
+
+            <button id="checkButton"
+                    class="w-full mt-5 bg-green-700 text-white py-3 rounded-lg font-bold hover:bg-green-800">
+                Identify Waste
+            </button>
+
+            <div id="result" class="hidden mt-6 p-5 rounded-xl border"
+                 aria-live="polite"></div>
+
+        </div>
+    </section>
+
+    <!-- Eco Score -->
+    <section class="max-w-3xl mx-auto px-5 py-10">
+        <div class="bg-white border border-green-200 rounded-2xl p-7 text-center shadow-sm">
+            <div class="text-4xl">🌱</div>
+            <h2 class="text-2xl font-bold mt-3">Your Eco Score</h2>
+            <p id="score" class="text-5xl font-bold text-green-700 my-4">0</p>
+            <p class="text-gray-500">
+                Identify a new waste item to earn 10 points.
+            </p>
+            <p id="scoreMessage" class="text-green-700 font-semibold mt-3">
+                Start your eco-friendly journey!
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white text-center p-6">
+        <h3 class="text-xl font-bold">WasteWise ♻</h3>
+        <p class="text-gray-300 mt-2">Learn • Segregate • Recycle • Protect</p>
+        <p class="text-sm text-gray-400 mt-4">
+            © 2026 WasteWise | Smart Waste Segregation Assistant
+        </p>
+    </footer>
+
+    <script>
+        const wasteData = [
+            {
+                names: ["plastic bottle", "plastic"],
+                item: "Plastic Bottle",
+                category: "Dry Waste",
+                icon: "♻️",
+                instruction: "Empty and rinse the bottle. Put it in the recyclable dry-waste stream where accepted."
+            },
+            {
+                names: ["paper", "newspaper"],
+                item: "Paper",
+                category: "Dry Waste",
+                icon: "📄",
+                instruction: "Keep paper clean and dry. Separate it for recycling."
+            },
+            {
+                names: ["cardboard", "carton"],
+                item: "Cardboard",
+                category: "Dry Waste",
+                icon: "📦",
+                instruction: "Keep cardboard dry, flatten it, and send it for recycling."
+            },
+            {
+                names: ["glass bottle", "glass"],
+                item: "Glass Bottle",
+                category: "Dry Waste",
+                icon: "🍾",
+                instruction: "Separate glass for local collection. Wrap broken glass securely and follow local safety rules."
+            },
+            {
+                names: ["food waste", "food", "leftover food"],
+                item: "Food Waste",
+                category: "Wet Waste",
+                icon: "🍲",
+                instruction: "Collect food scraps separately for composting or the local wet-waste service."
+            },
+            {
+                names: ["banana peel", "fruit peel", "vegetable peel"],
+                item: "Banana or Vegetable Peel",
+                category: "Wet Waste",
+                icon: "🍌",
+                instruction: "Place organic peels in the wet-waste or compost collection."
+            },
+            {
+                names: ["old mobile phone", "mobile phone", "phone", "laptop", "computer"],
+                item: "Electronic Device",
+                category: "E-Waste",
+                icon: "💻",
+                instruction: "Do not put electronics in household bins. Use an authorized e-waste collection or take-back service."
+            },
+            {
+                names: ["battery", "batteries"],
+                item: "Battery",
+                category: "Special Disposal",
+                icon: "🔋",
+                instruction: "Never place batteries in ordinary waste. Take them to a suitable battery collection point. Avoid damaging them."
+            },
+            {
+                names: ["expired medicine", "medicine", "medicines", "tablets"],
+                item: "Expired Medicine",
+                category: "Special Disposal",
+                icon: "💊",
+                instruction: "Ask a pharmacy or authorized medicine take-back service how to dispose of it. Do not flush medicines unless official guidance says to."
+            },
+            {
+                names: ["light bulb", "bulb", "tube light"],
+                item: "Light Bulb",
+                category: "Special Disposal",
+                icon: "💡",
+                instruction: "Check local collection guidance. Fluorescent and CFL bulbs may contain mercury; keep them intact and handle carefully."
+            },
+            {
+                names: ["used tissue", "tissue", "dirty tissue"],
+                item: "Used Tissue",
+                category: "Special Disposal",
+                icon: "🧻",
+                instruction: "Usually place used tissues in residual waste unless your local authority provides different instructions."
+            }
+        ];
+
+        const searchInput = document.getElementById("searchItem");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const result = document.getElementById("result");
+        const scoreDisplay = document.getElementById("score");
+        const scoreMessage = document.getElementById("scoreMessage");
+
+        let ecoScore = 0;
+        const identifiedItems = new Set();
+
+        function checkWaste() {
+            const query = searchInput.value.trim().toLowerCase();
+            const selectedCategory = categoryFilter.value;
+
+            if (!query && selectedCategory === "All") {
+                showMessage("Please enter a waste item or select a category.");
+                return;
+            }
+
+            let matches = wasteData.filter(waste => {
+                const matchesName =
+                    !query ||
+                    waste.item.toLowerCase().includes(query) ||
+                    waste.names.some(name => name.includes(query));
+
+                const matchesCategory =
+                    selectedCategory === "All" ||
+                    waste.category === selectedCategory;
+
+                return matchesName && matchesCategory;
+            });
+
+            if (matches.length === 0) {
+                showMessage("Item not found. Try another name or change the category filter.");
+                return;
+            }
+
+            if (query) {
+                const exactMatch = matches.find(waste =>
+                    waste.item.toLowerCase() === query ||
+                    waste.names.includes(query)
+                );
+
+                if (exactMatch) {
+                    matches = [exactMatch];
+                }
+            }
+
+            if (query && matches.length === 1) {
+                const waste = matches[0];
+
+                if (!identifiedItems.has(waste.item)) {
+                    identifiedItems.add(waste.item);
+                    ecoScore += 10;
+                    scoreDisplay.textContent = ecoScore;
+                    scoreMessage.textContent =
+                        "Great! You earned 10 points for identifying a new item.";
+                } else {
+                    scoreMessage.textContent =
+                        "You already identified this item. Your score stays the same.";
+                }
+            }
+
+            result.className =
+                "mt-6 p-5 rounded-xl border bg-green-50 border-green-200";
+
+            if (!query && selectedCategory !== "All") {
+                result.innerHTML = `
+                    <h3 class="text-xl font-bold text-green-800 mb-4">
+                        ${selectedCategory} Items
+                    </h3>
+                    <div class="space-y-3">
+                        ${matches.map(waste => `
+                            <div class="bg-white p-4 rounded-lg border">
+                                <p class="font-bold">${waste.icon} ${waste.item}</p>
+                                <p class="text-sm text-gray-600 mt-1">
+                                    ${waste.instruction}
+                                </p>
+                            </div>
+                        `).join("")}
+                    </div>`;
+                return;
+            }
+
+            result.innerHTML = matches.map(waste => `
+                <div class="mb-4 last:mb-0">
+                    <p class="text-sm uppercase tracking-wide text-green-700 font-bold">
+                        Recommended Category
+                    </p>
+                    <h3 class="text-2xl font-bold mt-2">
+                        ${waste.icon} ${waste.category}
+                    </h3>
+                    <p class="font-semibold mt-3">${waste.item}</p>
+                    <p class="text-gray-600 mt-2">${waste.instruction}</p>
+                </div>
+            `).join("");
+        }
+
+        function showMessage(message) {
+            result.className =
+                "mt-6 p-5 rounded-xl border bg-amber-50 border-amber-200";
+            result.textContent = message;
+        }
+
+        document.getElementById("checkButton")
+            .addEventListener("click", checkWaste);
+
+        searchInput.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                checkWaste();
+            }
+        });
+
+        categoryFilter.addEventListener("change", function() {
+            if (categoryFilter.value !== "All") {
+                searchInput.value = "";
+                checkWaste();
+            }
+        });
+    </script>
+
+</body>
+</html>
